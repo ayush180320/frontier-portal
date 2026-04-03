@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="frontierApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Frontier Portal</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+    <style>
+        body { font-family: 'Open Sans', sans-serif; background-color: #f3f3f4; padding-bottom: 50px; }
+        #header { background: #333; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        #header a { color: #ccc; text-decoration: none; margin-left: 15px; }
+        #header a:hover { color: white; }
+        #shortcut { background: #fff; padding: 15px; border-bottom: 1px solid #ddd; margin-bottom: 20px; }
+        #shortcut ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+        .jarvismetro-tile { display: block; padding: 10px 20px; background: #2b7cff; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; }
+        .jarvismetro-tile:hover { background: #1a5bbd; color: white; text-decoration: none; }
+        .breadcrumb { background: transparent; margin-bottom: 0; padding-left: 20px; }
+        
+        /* Modernized Creator Boxes */
+        .creator-box { background: white; border: 2px dashed #ccc; border-radius: 8px; padding: 40px 20px; display: block; cursor: pointer; transition: all 0.3s ease; color: #333; text-decoration: none; }
+        .creator-box:hover { border-color: #2b7cff; background: #f9fbff; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .start-title-button { font-size: 1.2em; font-weight: bold; }
+        
+        .page-footer { background: #222; color: #aaa; padding: 10px 20px; position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div id="logo-group">
+            <h2><strong>Sfera</strong> Frontier</h2>
+        </div>
+        <div class="pull-right">
+            <a href="#"><i class="fa fa-user"></i> andrew.hernandez</a>
+            <a href="#" title="Sign Out"><i class="fa fa-sign-out"></i> Logout</a>
+        </div>
+    </header>
+
+    <div id="shortcut">
+        <ul>
+            <li><a href="#" class="jarvismetro-tile">Amazon</a></li>
+            <li><a href="#" class="jarvismetro-tile">Archive</a></li>
+            <li><a href="#" class="jarvismetro-tile">imf</a></li>
+            <li><a href="#" class="jarvismetro-tile" style="background:#444;">iTunes</a></li>
+            <li><a href="#" class="jarvismetro-tile">Microsoft</a></li>
+            <li><a href="#" class="jarvismetro-tile">Netflix</a></li>
+        </ul>
+    </div>
+
+    <div id="main" role="main">
+        <div id="ribbon" style="display:flex; justify-content: space-between; padding-right: 20px;">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">iTunes</a></li>
+                <li><strong>Select</strong></li>
+            </ol>
+            <button class="btn btn-warning btn-sm" onclick="alert('Feedback modal opened!')">Feedback</button>
+        </div>
+
+        <div id="content">
+            <div ng-controller="PageViewController" class="container text-center" style="margin-top: 40px;">
+                
+                <h1>&nbsp;iTunes&nbsp;</h1>
+                <h2 style="color: #666;">Frontier Portal</h2>
+                <br><br>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="creator-box" 
+                             ngf-select="uploadFiles($file)" 
+                             ngf-drop="uploadFiles($file)" 
+                             accept="video/*, .zip, .itmsp">
+                            <i class="fa fa-cloud-upload fa-4x" style="color: #2b7cff; margin-bottom: 15px;"></i>
+                            <div class="start-title-button">Build your Package</div>
+                            <p class="text-muted" style="margin-top: 10px;">Click or drag files here (No Flash needed)</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <a href="#" class="creator-box" style="border-style: solid;">
+                            <i class="fa fa-check-circle fa-4x" style="color: #4CAF50; margin-bottom: 15px;"></i>
+                            <div class="start-title-button">Verify your Package</div>
+                            <p class="text-muted" style="margin-top: 10px;">Proceed to Metadata Validation</p>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <span>Sfera © 2026</span>
+        <span>Version 11.06 (HTML5 Update)</span>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js"></script>
+
+    <script type="text/javascript">
+        // Initialize the app and inject the ngFileUpload dependency
+        var app = angular.module('frontierApp', ['ngFileUpload']);
+
+        // Controller to handle page logic
+        app.controller('PageViewController', function($scope) {
+            
+            // This function replaces your old Flash upload mechanism
+            $scope.uploadFiles = function(file) {
+                if (file) {
+                    console.log("File detected:", file);
+                    alert("Success!\n\nYou have natively selected: " + file.name + "\nSize: " + Math.round(file.size / 1024 / 1024) + " MB\n\nThis is running 100% in HTML5.");
+                    
+                    // In the future, this is where you would send the file to your backend server:
+                    // Upload.upload({ url: 'YOUR_SERVER_API', data: {file: file} });
+                }
+            };
+        });
+    </script>
+</body>
+</html>
